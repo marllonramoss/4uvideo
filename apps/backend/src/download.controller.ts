@@ -76,8 +76,8 @@ export class DownloadController {
         }
       });
     } else {
-      // Para MP4: usar yt-dlp diretamente
-      const args = ['-f', 'bestvideo+bestaudio', '-o', '-', url];
+      // Para MP4: usar yt-dlp com formato mais compatível
+      const args = ['-f', 'best[ext=mp4]/best', '-o', '-', url];
       const ytdlp = spawn('/usr/local/bin/yt-dlp', args);
 
       let totalBytes = 0;

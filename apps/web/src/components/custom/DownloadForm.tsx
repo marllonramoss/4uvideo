@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { DownloadFormData, DownloadStatus } from "@/types";
+import { cleanYouTubeUrl, isValidYouTubeUrl } from "@/lib/utils";
 
 export function DownloadForm() {
   const [formData, setFormData] = useState<DownloadFormData>({
@@ -29,9 +30,12 @@ export function DownloadForm() {
       return;
     }
 
-    // Validar se é uma URL do YouTube
-    const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+/;
-    if (!youtubeRegex.test(formData.url)) {
+    // Limpar e validar a URL do YouTube
+    const cleanedUrl = cleanYouTubeUrl(formData.url.trim());
+    console.log('Frontend: URL original:', formData.url);
+    console.log('Frontend: URL limpa:', cleanedUrl);
+
+    if (!isValidYouTubeUrl(cleanedUrl)) {
       setDownloadStatus({
         status: "error",
         message: "Por favor, insira uma URL válida do YouTube",
@@ -42,11 +46,20 @@ export function DownloadForm() {
     setDownloadStatus({ status: "loading" });
 
     try {
+      const apiUrl = `http://localhost:4000/download?url=${encodeURIComponent(cleanedUrl)}&format=${formData.format}`;
+      console.log('Frontend: Fazendo requisição para:', apiUrl);
+      
       // Chamada para o backend na porta 4000
-      const response = await fetch(`http://localhost:4000/download?url=${encodeURIComponent(formData.url)}&format=${formData.format}`);
+      const response = await fetch(apiUrl);
+      
+      console.log('Frontend: Status da resposta:', response.status);
+      console.log('Frontend: Headers da resposta:', Object.fromEntries(response.headers.entries()));
       
       if (response.ok) {
+        console.log('Frontend: Iniciando download do arquivo...');
         const blob = await response.blob();
+        console.log('Frontend: Tamanho do arquivo:', blob.size, 'bytes');
+        
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -56,17 +69,21 @@ export function DownloadForm() {
         window.URL.revokeObjectURL(url);
         document.body.removeChild(a);
         
+        console.log('Frontend: Download iniciado com sucesso!');
         setDownloadStatus({
           status: "success",
           message: "Download iniciado com sucesso!",
         });
       } else {
-        throw new Error("Erro ao baixar o vídeo");
+        const errorText = await response.text();
+        console.error('Frontend: Erro na resposta:', response.status, errorText);
+        throw new Error(`Erro ${response.status}: ${errorText}`);
       }
     } catch (error) {
+      console.error('Frontend: Erro no download:', error);
       setDownloadStatus({
         status: "error",
-        message: "Erro ao processar o download. Tente novamente.",
+        message: `Erro ao processar o download: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
       });
     }
   };
