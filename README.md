@@ -41,7 +41,7 @@
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/4uvideo.git
+git clone https://github.com/marllonramoss/4uvideo.git
 cd 4uvideo
 ```
 
@@ -197,9 +197,10 @@ Se este projeto te ajudou, considere me pagar um café! ☕
 
 ## 📞 Contato
 
-- **GitHub**: [@seu-usuario](https://github.com/seu-usuario)
-- **Email**: seu-email@exemplo.com
+- **GitHub**: [@marllonramoss](https://github.com/marllonramoss)
+- **LinkedIn**: [Marllon Ramos](https://www.linkedin.com/in/marllonramos/)
+- **Portfólio**: [marllonramos.com](https://marllonramos.com/)
 
 ---
 
-**Desenvolvido com ❤️ por [Seu Nome]**
+**Desenvolvido com ❤️ por Marllon Ramos**
