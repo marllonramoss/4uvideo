@@ -42,9 +42,8 @@ export function DownloadForm() {
     setDownloadStatus({ status: "loading" });
 
     try {
-      // Aqui será feita a chamada para o backend
-      // Por enquanto, simulamos o download
-      const response = await fetch(`/api/download?url=${encodeURIComponent(formData.url)}&format=${formData.format}`);
+      // Chamada para o backend na porta 4000
+      const response = await fetch(`http://localhost:4000/download?url=${encodeURIComponent(formData.url)}&format=${formData.format}`);
       
       if (response.ok) {
         const blob = await response.blob();
