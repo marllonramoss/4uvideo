@@ -1,6 +1,6 @@
 # 🎬 4U Video - YouTube Downloader
 
-> **Download vídeos do YouTube em formato MP4 ou MP3 de forma rápida, segura e gratuita.**
+> **Download YouTube videos in MP4 or MP3 format quickly, securely, and for free.**
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.4.4-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![NestJS](https://img.shields.io/badge/NestJS-10.0.0-red?style=flat-square&logo=nestjs)](https://nestjs.com/)
@@ -9,43 +9,44 @@
 
 ## ✨ Features
 
-- 🎥 **Download MP4**: Vídeos em alta qualidade
-- 🎵 **Download MP3**: Áudio extraído e convertido
-- 🎨 **Interface Moderna**: Design dark com ShadCN UI
-- 📱 **Responsivo**: Funciona em desktop e mobile
-- ⚡ **Rápido**: Download direto sem armazenamento
-- 🔒 **Seguro**: Sem registro, sem dados pessoais
-- 🧹 **URL Inteligente**: Limpa automaticamente URLs do YouTube
+- 🎥 **MP4 Downloads**: High-quality video files
+- 🎵 **MP3 Downloads**: Extracted and converted audio
+- 🎨 **Modern UI**: Dark design with ShadCN UI
+- 📱 **Responsive**: Works on desktop and mobile
+- ⚡ **Fast**: Direct download without storage
+- 🔒 **Secure**: No registration, no personal data
+- 🧹 **Smart URLs**: Automatically cleans YouTube URLs
 
-## 🛠️ Tecnologias
+## 🛠️ Tech Stack
 
 ### Frontend
-- **Next.js 15** - Framework React com App Router
-- **TypeScript** - Tipagem estática
-- **Tailwind CSS 4** - Estilização utilitária
-- **ShadCN UI** - Componentes modernos
-- **Lucide React** - Ícones
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Static typing
+- **Tailwind CSS 4** - Utility-first styling
+- **ShadCN UI** - Modern components
+- **Lucide React** - Icons
 
 ### Backend
-- **NestJS** - Framework Node.js
-- **yt-dlp** - Download de vídeos do YouTube
-- **FFmpeg** - Conversão de áudio/vídeo
-- **TypeScript** - Tipagem estática
+- **NestJS** - Node.js framework
+- **yt-dlp** - YouTube video downloader
+- **FFmpeg** - Audio/video conversion
+- **TypeScript** - Static typing
 
-## 🚀 Instalação
+## 🚀 Quick Start
 
-### Pré-requisitos
-- Node.js 18+ 
-- npm ou yarn
-- yt-dlp instalado globalmente
+### Prerequisites
+- Node.js 18+
+- yt-dlp installed globally
 
-### 1. Clone o repositório
+### Installation
+
+1. **Clone the repository**
 ```bash
 git clone https://github.com/marllonramoss/4uvideo.git
 cd 4uvideo
 ```
 
-### 2. Instale o yt-dlp
+2. **Install yt-dlp**
 ```bash
 # macOS
 brew install yt-dlp
@@ -53,154 +54,115 @@ brew install yt-dlp
 # Linux
 sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
 sudo chmod a+rx /usr/local/bin/yt-dlp
-
-# Windows
-# Baixe de https://github.com/yt-dlp/yt-dlp/releases
 ```
 
-### 3. Configure o backend
+3. **Setup backend**
 ```bash
 cd apps/backend
 npm install
-```
-
-### 4. Configure o frontend
-```bash
-cd apps/web
-npm install
-```
-
-## 🏃‍♂️ Como usar
-
-### 1. Inicie o backend
-```bash
-cd apps/backend
 npm run start:dev
 ```
-O backend estará disponível em `http://localhost:4000`
 
-### 2. Inicie o frontend
+4. **Setup frontend**
 ```bash
 cd apps/web
+npm install
 npm run dev
 ```
-O frontend estará disponível em `http://localhost:3000`
 
-### 3. Use a aplicação
-1. Acesse `http://localhost:3000`
-2. Cole uma URL do YouTube
-3. Escolha o formato (MP3 ou MP4)
-4. Clique em "Baixar"
-5. O download começará automaticamente
+5. **Open the app**
+- Frontend: `http://localhost:3000`
+- Backend: `http://localhost:4000`
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 4uvideo/
 ├── apps/
-│   ├── web/                 # Frontend Next.js
+│   ├── web/                 # Next.js frontend
 │   │   ├── src/
 │   │   │   ├── app/         # App Router
-│   │   │   ├── components/  # Componentes React
-│   │   │   │   ├── ui/      # Componentes ShadCN
-│   │   │   │   └── custom/  # Componentes personalizados
-│   │   │   ├── lib/         # Utilitários
-│   │   │   └── types/       # Tipos TypeScript
-│   │   └── public/          # Arquivos estáticos
-│   └── backend/             # Backend NestJS
+│   │   │   ├── components/  # React components
+│   │   │   ├── lib/         # Utilities
+│   │   │   └── types/       # TypeScript types
+│   └── backend/             # NestJS backend
 │       ├── src/
-│       │   ├── download.controller.ts  # Endpoint de download
-│       │   ├── app.controller.ts       # Controller principal
-│       │   └── app.module.ts           # Módulo principal
-│       └── package.json
-├── packages/                # Pacotes compartilhados
-│   ├── ui/                  # Componentes UI
-│   ├── eslint-config/       # Configuração ESLint
-│   └── typescript-config/   # Configuração TypeScript
-└── README.md
+│       │   ├── download.controller.ts
+│       │   └── app.module.ts
+└── packages/                # Shared packages
 ```
 
 ## 🔧 API Endpoints
 
 ### GET `/download`
-Baixa vídeos do YouTube em MP3 ou MP4.
+Download YouTube videos in MP3 or MP4 format.
 
-**Parâmetros:**
-- `url` (string, obrigatório): URL do vídeo do YouTube
-- `format` (string, obrigatório): `mp3` ou `mp4`
+**Parameters:**
+- `url` (string, required): YouTube video URL
+- `format` (string, required): `mp3` or `mp4`
 
-**Exemplo:**
+**Example:**
 ```
 GET /download?url=https://youtube.com/watch?v=VIDEO_ID&format=mp3
 ```
 
-**Resposta:**
-- Arquivo MP3/MP4 para download
-- Headers: `Content-Disposition`, `Content-Type`
-
 ### GET `/test-controller`
-Testa se o controller está funcionando.
+Health check endpoint.
 
-**Resposta:**
+**Response:**
 ```json
 {
-  "message": "DownloadController está funcionando!",
+  "message": "DownloadController is working!",
   "status": "ok",
   "timestamp": "2024-01-01T00:00:00.000Z"
 }
 ```
 
-## 🎯 Features Técnicas
+## 🎯 Technical Features
 
-### Frontend
-- **Validação de URLs**: Limpa automaticamente URLs do YouTube
-- **Feedback em tempo real**: Loading states e mensagens de erro
-- **Download automático**: Inicia download sem intervenção manual
-- **Design responsivo**: Funciona em todos os dispositivos
+- **Smart URL Processing**: Automatically cleans YouTube URLs
+- **Real-time Feedback**: Loading states and error messages
+- **Direct Streaming**: No temporary file storage
+- **Cross-platform**: Compatible with macOS, Linux, and Windows
+- **Error Handling**: Detailed logging and clear error messages
 
-### Backend
-- **Pipeline otimizado**: yt-dlp + FFmpeg para máxima compatibilidade
-- **Streaming direto**: Sem armazenamento de arquivos temporários
-- **Tratamento de erros**: Logs detalhados e mensagens claras
-- **CORS configurado**: Comunicação segura entre frontend e backend
+## 🔒 Security & Privacy
 
-## 🔒 Segurança e Privacidade
+- ✅ **No Registration**: No personal data collection
+- ✅ **No Storage**: Files don't stay on server
+- ✅ **Direct Download**: Streaming to browser
+- ✅ **CORS Configured**: Secure cross-domain communication
 
-- ✅ **Sem registro**: Não coletamos dados pessoais
-- ✅ **Sem armazenamento**: Arquivos não ficam no servidor
-- ✅ **Download direto**: Streaming direto para o navegador
-- ✅ **CORS configurado**: Comunicação segura entre domínios
+## ⚠️ Legal Notice
 
-## ⚠️ Aviso Legal
+This project is for **educational purposes**. Downloading YouTube videos may violate [YouTube's Terms of Service](https://www.youtube.com/t/terms) if used publicly or commercially.
 
-Este projeto é para **fins educacionais**. Baixar vídeos do YouTube pode violar os [Termos de Serviço da plataforma](https://www.youtube.com/t/terms) se for utilizado de forma pública ou comercial.
+**Please respect copyright and use responsibly.**
 
-**Respeite os direitos autorais e use com responsabilidade.**
+## 🤝 Contributing
 
-## 🤝 Contribuindo
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+## 📝 License
 
-## 📝 Licença
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+## ☕ Support
 
-## ☕ Suporte
-
-Se este projeto te ajudou, considere me pagar um café! ☕
+If this project helped you, consider buying me a coffee! ☕
 
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/marllondev)
 
-## 📞 Contato
+## 📞 Contact
 
 - **GitHub**: [@marllonramoss](https://github.com/marllonramoss)
 - **LinkedIn**: [Marllon Ramos](https://www.linkedin.com/in/marllonramos/)
-- **Portfólio**: [marllonramos.com](https://marllonramos.com/)
+- **Portfolio**: [marllonramos.com](https://marllonramos.com/)
 
 ---
 
-**Desenvolvido com ❤️ por Marllon Ramos**
+**Built with ❤️ by Marllon Ramos**
