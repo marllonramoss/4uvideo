@@ -1,0 +1,64 @@
+---
+alwaysApply: true
+---
+# 🎬 YouTube Downloader Web App
+
+## 📌 Descrição
+Aplicação web full stack para baixar vídeos do YouTube, permitindo ao usuário escolher entre os formatos **MP4 (vídeo)** ou **MP3 (áudio)**.
+
+---
+
+## 🧱 Estrutura do Projeto
+
+```
+youtube-downloader-app/
+├── frontend/   → Interface com Next.js
+└── backend/    → API com Node.js + Express
+```
+
+---
+
+## ⚙️ Tecnologias Utilizadas
+
+- **Frontend**: Next.js + TailwindCSS (ou HTML/JS simples)
+- **Backend**: Node.js + Express
+- **Download/Conversão**:
+  - [`ytdl-core`](https://www.npmjs.com/package/ytdl-core): para baixar vídeos/áudios do YouTube
+  - [`ffmpeg`](https://ffmpeg.org/): para converter vídeo para MP3
+  - [`fluent-ffmpeg`](https://www.npmjs.com/package/fluent-ffmpeg): integração com ffmpeg em Node.js
+
+---
+
+## 🔄 Fluxo da Aplicação
+
+1. Usuário insere o link de um vídeo do YouTube
+2. Seleciona o formato desejado: `mp4` ou `mp3`
+3. O frontend envia uma requisição para o backend com:
+   ```json
+   {
+     "url": "https://youtube.com/...",
+     "format": "mp3"
+   }
+   ```
+4. O backend:
+   - Usa `ytdl-core` para obter o conteúdo
+   - Converte para MP3 se necessário (via ffmpeg)
+   - Envia o arquivo de volta ao navegador com o header:
+     ```
+     Content-Disposition: attachment; filename="nome-do-arquivo.extensão"
+     ```
+5. O navegador inicia o download automaticamente
+
+---
+
+## ✅ Endpoints
+
+- `GET /download?url=<videoUrl>&format=mp3|mp4`  
+  → Inicia o download do vídeo/áudio conforme o formato solicitado
+
+---
+
+## ⚠️ Aviso Legal
+
+Este projeto é para **fins educacionais**. Baixar vídeos do YouTube pode violar os [Termos de Serviço da plataforma](https://www.youtube.com/t/terms) se for utilizado de forma pública ou comercial.
+

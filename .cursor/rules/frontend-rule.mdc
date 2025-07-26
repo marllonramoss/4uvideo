@@ -1,0 +1,76 @@
+---
+alwaysApply: true
+---
+```rules
+# Regras de desenvolvimento frontend para projetos Next.js com ShadCN UI e Tailwind CSS
+
+# Estilo do projeto
+- Utilize Tailwind CSS como sistema base de estilização.
+- Use o ShadCN UI como biblioteca de componentes.
+- Utilize os componentes do ShadCN como base de construção de novos componentes (por exemplo: Button, Input, Card).
+- Prefira composições com os componentes do ShadCN ao invés de criar do zero, quando aplicável.
+
+# Componentização e SOLID
+- Componentize tudo ao máximo. Cada componente deve fazer apenas uma coisa (SRP - Single Responsibility Principle).
+- Evite componentes muito grandes. Divida em componentes menores reutilizáveis.
+- Utilize props claras e bem definidas.
+- Evite acoplamento. Os componentes devem depender do mínimo possível entre si.
+- Para lógica compartilhada entre componentes, use hooks personalizados (`useXyz.ts`).
+- Componentes que apenas apresentam dados devem ser puros (sem efeitos colaterais ou dependências externas).
+
+# Organização de arquivos
+- Estrutura recomendada:
+  - `src/app/`: rotas e estrutura principal do Next.js (App Router).
+  - `src/components/ui/`: componentes baseados em ShadCN (originais e estendidos).
+  - `src/components/custom/`: componentes reutilizáveis personalizados.
+  - `src/sections/`: seções específicas de páginas (Hero, Features, Footer...).
+  - `src/constants/`: constantes reutilizáveis (navLinks, mock data, config).
+  - `src/lib/`: bibliotecas auxiliares (funções, formatações, validações).
+  - `src/hooks/`: hooks customizados.
+  - `src/types/`: tipagens TypeScript.
+  - `src/styles/`: estilos globais e tokens.
+  - `src/config/`: arquivos de configuração do projeto, como tema, links, etc.
+
+# Tailwind CSS e globals.css
+- Use Tailwind como estilo principal. Evite escrever CSS puro.
+- Defina variáveis em `:root` no `globals.css` apenas para tokens customizados (ex: `--radius`, `--font-sans`).
+- Utilize `@layer base` apenas para sobrescrever estilos globais necessários.
+- Não sobrescreva os estilos do Tailwind ou ShadCN sem motivo técnico real.
+- No `tailwind.config.ts`, defina:
+  - cores do tema (`primary`, `secondary`, `background`, etc).
+  - espaçamentos personalizados, radius e sombras consistentes com o design.
+  - fontes padrão do projeto.
+  - breakpoints personalizados, se necessário.
+
+# Uso dos componentes ShadCN
+- Importe os componentes do ShadCN por `/components/ui/`.
+- Ao estender componentes do ShadCN, utilize `forwardRef` quando necessário.
+- Use `cn()` para combinar classes de forma limpa.
+- Siga a arquitetura do ShadCN para organização de props e variantes.
+- Prefira `variants.ts` para componentes que possuem múltiplas variações visuais.
+
+# Regras gerais de Next.js
+- Use `next/link` para navegação entre páginas.
+- Não utilize `useRouter()` em Server Components.
+- Use o App Router (`src/app/`) com layouts (`layout.tsx`) e templates (`template.tsx`).
+- Crie arquivos `loading.tsx` e `error.tsx` para cada rota que tenha carregamento assíncrono.
+- Utilize Server Components sempre que possível. Use Client Components apenas quando necessário (interatividade).
+- Centralize temas e configurações globais em `src/config/theme.ts` ou semelhante.
+
+# Convenções
+- Use `PascalCase` para nomes de arquivos de componentes.
+- Use `camelCase` para nomes de funções e variáveis.
+- Evite nomes genéricos como `Component1`, `Box`, `Wrapper`. Prefira nomes semânticos e descritivos.
+- Componentes que usam ShadCN podem ser nomeados como `UiButton`, `UiInput`, ou `FormInputText`.
+
+# Tipagem
+- Use TypeScript em todos os arquivos.
+- Tipos de props devem ser definidos via interfaces.
+- Não use `any`. Use `unknown` e refine quando necessário.
+- Tipos reutilizáveis devem estar em `src/types/`.
+
+# Boas práticas finais
+- Mantenha os arquivos pequenos e legíveis.
+- Priorize legibilidade ao invés de otimização prematura.
+- Evite comentários excessivos. Código claro fala por si.
+```
