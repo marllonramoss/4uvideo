@@ -1,135 +1,205 @@
-# Turborepo starter
+# 🎬 4U Video - YouTube Downloader
 
-This Turborepo starter is maintained by the Turborepo core team.
+> **Download vídeos do YouTube em formato MP4 ou MP3 de forma rápida, segura e gratuita.**
 
-## Using this example
+[![Next.js](https://img.shields.io/badge/Next.js-15.4.4-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![NestJS](https://img.shields.io/badge/NestJS-10.0.0-red?style=flat-square&logo=nestjs)](https://nestjs.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 
-Run the following command:
+## ✨ Features
 
-```sh
-npx create-turbo@latest
+- 🎥 **Download MP4**: Vídeos em alta qualidade
+- 🎵 **Download MP3**: Áudio extraído e convertido
+- 🎨 **Interface Moderna**: Design dark com ShadCN UI
+- 📱 **Responsivo**: Funciona em desktop e mobile
+- ⚡ **Rápido**: Download direto sem armazenamento
+- 🔒 **Seguro**: Sem registro, sem dados pessoais
+- 🧹 **URL Inteligente**: Limpa automaticamente URLs do YouTube
+
+## 🛠️ Tecnologias
+
+### Frontend
+- **Next.js 15** - Framework React com App Router
+- **TypeScript** - Tipagem estática
+- **Tailwind CSS 4** - Estilização utilitária
+- **ShadCN UI** - Componentes modernos
+- **Lucide React** - Ícones
+
+### Backend
+- **NestJS** - Framework Node.js
+- **yt-dlp** - Download de vídeos do YouTube
+- **FFmpeg** - Conversão de áudio/vídeo
+- **TypeScript** - Tipagem estática
+
+## 🚀 Instalação
+
+### Pré-requisitos
+- Node.js 18+ 
+- npm ou yarn
+- yt-dlp instalado globalmente
+
+### 1. Clone o repositório
+```bash
+git clone https://github.com/seu-usuario/4uvideo.git
+cd 4uvideo
 ```
 
-## What's inside?
+### 2. Instale o yt-dlp
+```bash
+# macOS
+brew install yt-dlp
 
-This Turborepo includes the following packages/apps:
+# Linux
+sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+sudo chmod a+rx /usr/local/bin/yt-dlp
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+# Windows
+# Baixe de https://github.com/yt-dlp/yt-dlp/releases
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+### 3. Configure o backend
+```bash
+cd apps/backend
+npm install
 ```
 
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+### 4. Configure o frontend
+```bash
+cd apps/web
+npm install
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## 🏃‍♂️ Como usar
+
+### 1. Inicie o backend
+```bash
+cd apps/backend
+npm run start:dev
+```
+O backend estará disponível em `http://localhost:4000`
+
+### 2. Inicie o frontend
+```bash
+cd apps/web
+npm run dev
+```
+O frontend estará disponível em `http://localhost:3000`
+
+### 3. Use a aplicação
+1. Acesse `http://localhost:3000`
+2. Cole uma URL do YouTube
+3. Escolha o formato (MP3 ou MP4)
+4. Clique em "Baixar"
+5. O download começará automaticamente
+
+## 📁 Estrutura do Projeto
 
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+4uvideo/
+├── apps/
+│   ├── web/                 # Frontend Next.js
+│   │   ├── src/
+│   │   │   ├── app/         # App Router
+│   │   │   ├── components/  # Componentes React
+│   │   │   │   ├── ui/      # Componentes ShadCN
+│   │   │   │   └── custom/  # Componentes personalizados
+│   │   │   ├── lib/         # Utilitários
+│   │   │   └── types/       # Tipos TypeScript
+│   │   └── public/          # Arquivos estáticos
+│   └── backend/             # Backend NestJS
+│       ├── src/
+│       │   ├── download.controller.ts  # Endpoint de download
+│       │   ├── app.controller.ts       # Controller principal
+│       │   └── app.module.ts           # Módulo principal
+│       └── package.json
+├── packages/                # Pacotes compartilhados
+│   ├── ui/                  # Componentes UI
+│   ├── eslint-config/       # Configuração ESLint
+│   └── typescript-config/   # Configuração TypeScript
+└── README.md
 ```
 
-### Remote Caching
+## 🔧 API Endpoints
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+### GET `/download`
+Baixa vídeos do YouTube em MP3 ou MP4.
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+**Parâmetros:**
+- `url` (string, obrigatório): URL do vídeo do YouTube
+- `format` (string, obrigatório): `mp3` ou `mp4`
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
+**Exemplo:**
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+GET /download?url=https://youtube.com/watch?v=VIDEO_ID&format=mp3
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+**Resposta:**
+- Arquivo MP3/MP4 para download
+- Headers: `Content-Disposition`, `Content-Type`
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+### GET `/test-controller`
+Testa se o controller está funcionando.
 
+**Resposta:**
+```json
+{
+  "message": "DownloadController está funcionando!",
+  "status": "ok",
+  "timestamp": "2024-01-01T00:00:00.000Z"
+}
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
+## 🎯 Features Técnicas
 
-## Useful Links
+### Frontend
+- **Validação de URLs**: Limpa automaticamente URLs do YouTube
+- **Feedback em tempo real**: Loading states e mensagens de erro
+- **Download automático**: Inicia download sem intervenção manual
+- **Design responsivo**: Funciona em todos os dispositivos
 
-Learn more about the power of Turborepo:
+### Backend
+- **Pipeline otimizado**: yt-dlp + FFmpeg para máxima compatibilidade
+- **Streaming direto**: Sem armazenamento de arquivos temporários
+- **Tratamento de erros**: Logs detalhados e mensagens claras
+- **CORS configurado**: Comunicação segura entre frontend e backend
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+## 🔒 Segurança e Privacidade
+
+- ✅ **Sem registro**: Não coletamos dados pessoais
+- ✅ **Sem armazenamento**: Arquivos não ficam no servidor
+- ✅ **Download direto**: Streaming direto para o navegador
+- ✅ **CORS configurado**: Comunicação segura entre domínios
+
+## ⚠️ Aviso Legal
+
+Este projeto é para **fins educacionais**. Baixar vídeos do YouTube pode violar os [Termos de Serviço da plataforma](https://www.youtube.com/t/terms) se for utilizado de forma pública ou comercial.
+
+**Respeite os direitos autorais e use com responsabilidade.**
+
+## 🤝 Contribuindo
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## ☕ Suporte
+
+Se este projeto te ajudou, considere me pagar um café! ☕
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/marllondev)
+
+## 📞 Contato
+
+- **GitHub**: [@seu-usuario](https://github.com/seu-usuario)
+- **Email**: seu-email@exemplo.com
+
+---
+
+**Desenvolvido com ❤️ por [Seu Nome]**
