@@ -24,8 +24,7 @@ export function Header() {
             size="sm"
             className="cursor-pointer gap-2 border-zinc-700 text-zinc-300 hover:bg-white hover:text-zinc-900 transition-colors"
             onClick={() => {
-              // Aqui você pode adicionar o link do Buy me a coffee
-              window.open("https://buymeacoffee.com/seu-usuario", "_blank");
+              window.open("https://buymeacoffee.com/marllondev", "_blank");
             }}
           >
             <Coffee className="w-4 h-4" />
