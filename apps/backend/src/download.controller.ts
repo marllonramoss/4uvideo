@@ -12,6 +12,75 @@ import * as ffmpegPath from 'ffmpeg-static';
 
 @Controller()
 export class DownloadController {
+  @Get('formats')
+  async getFormats(
+    @Query('url') url: string,
+    @Res() res: Response,
+  ) {
+    if (!url) {
+      throw new BadRequestException('Missing url');
+    }
+    if (!/^https?:\/\/(www\.)?youtube\.com\/watch\?v=/.test(url) && !/^https?:\/\/youtu\.be\//.test(url)) {
+      throw new BadRequestException('Invalid YouTube URL');
+    }
+    const ytdlp = spawn('/usr/local/bin/yt-dlp', ['-F', url]);
+    let output = '';
+    let error = '';
+    ytdlp.stdout.on('data', (data) => {
+      output += data.toString();
+    });
+    ytdlp.stderr.on('data', (data) => {
+      error += data.toString();
+    });
+    ytdlp.on('close', (code) => {
+      console.log('yt-dlp -F output:', output);
+      console.log('yt-dlp -F error:', error);
+      if (code !== 0) {
+        return res.status(500).json({ error: error || 'yt-dlp error' });
+      }
+      // Parse yt-dlp -F output
+      const lines = output.split('\n');
+      const formats: any[] = [];
+      let found = false;
+      for (const line of lines) {
+        if (!found && line.trim().startsWith('ID')) {
+          found = true;
+          continue;
+        }
+        if (found && line.trim() && !line.startsWith('-')) {
+          // Parse format_id, ext, resolution
+          const parts = line.trim().split(/\s+/);
+          const format_id = parts[0];
+          const ext = parts[1];
+          const resolution = parts[2];
+          // Filtrar apenas vídeo (ignorar audio only, storyboard, images, etc.)
+          if (
+            resolution.match(/\d+x\d+/) &&
+            !line.includes('audio only') &&
+            !line.includes('images') &&
+            !line.includes('storyboard')
+          ) {
+            formats.push({
+              format_id,
+              ext,
+              resolution,
+              raw: line.trim(),
+            });
+          }
+        }
+      }
+      // Manter apenas um formato por resolução
+      const uniqueResolutions: Record<string, any> = {};
+      for (const f of formats) {
+        if (!uniqueResolutions[f.resolution]) {
+          uniqueResolutions[f.resolution] = f;
+        }
+      }
+      const filtered = Object.values(uniqueResolutions);
+      return res.json({ formats: filtered });
+    });
+  }
+
   @Get('download')
   async download(
     @Query('url') url: string,
